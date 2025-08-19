@@ -17,13 +17,13 @@ export default function Page() {
       <div className="flex flex-col items-center gap-10 p-8 max-w-6xl mx-auto w-full">
         <ToggleGroup type="single" value={toggle} onValueChange={setToggle} className="w-full md:w-[70%]">
           <ToggleGroupItem value="category-item" aria-label="Toggle bold" variant="outline">
-            Master Kategori Barang
+            <span className="max-sm:hidden">Master </span>Kategori<span className="max-sm:hidden"> Barang</span>
           </ToggleGroupItem>
           <ToggleGroupItem value="item" aria-label="Toggle italic" variant="outline">
-            Master Barang
+            <span className="max-sm:hidden">Master </span>Barang
           </ToggleGroupItem>
           <ToggleGroupItem value="stock-item" aria-label="Toggle strikethrough" variant="outline">
-            Stok Barang
+            Stok<span className="max-sm:hidden"> Barang</span>
           </ToggleGroupItem>
         </ToggleGroup>
         <QueryClientProvider client={queryClient}>

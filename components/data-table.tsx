@@ -311,17 +311,17 @@ export function DataTable<TData extends { id: string, deleted_at?: Date }, TValu
                 <Input disabled={loading} className="pl-9 w-full focus-visible:ring-0 focus-visible:outline-0" type="text" placeholder="Cari..." value={search}
                   onChange={e => setSearch(e.target.value)} onKeyDown={handleKeyDown} />
               </div>
-              <Button disabled={loading} onClick={() => setQueryVersion(queryVersion + 1)} className="!bg-inherit hover:!bg-input/50 h-full font-normal" size="sm" variant="outline">
+              <Button disabled={loading} onClick={() => setQueryVersion(queryVersion + 1)} className="!bg-inherit hover:!bg-input/50 h-auto font-normal" size="sm" variant="outline">
                 <RefreshCw className="text-muted-foreground" />
               </Button>
               <Sheet>
                 <SheetTrigger asChild disabled={loading}>
-                  <Button className="!bg-inherit hover:!bg-input/50 h-full font-normal" size="sm" variant="outline">
+                  <Button className="!bg-inherit hover:!bg-input/50 h-auto font-normal" size="sm" variant="outline">
                     <Funnel className="text-muted-foreground" />
                   </Button>
                 </SheetTrigger>
                 <SheetContent className="focus:outline-none flex flex-col gap-6">
-                  <SheetTitle className="text-base sm:text-lg flex gap-2 sm:gap-3 items-center">Options</SheetTitle>
+                  <SheetTitle className="text-base sm:text-lg flex gap-2 sm:gap-3 items-center">Filter</SheetTitle>
                   <div className="flex flex-col gap-3">
                     <Label>Urutkan Berdasarkan</Label>
                     <CustomSelect
