@@ -21,9 +21,9 @@ Duplicate `.env.example` to `.env` and fill in the values.
 ## Database
 
 ```bash
-drizle-kit generate
-drizle-kit migrate
-drizle-kit push
+drizzle-kit generate
+drizzle-kit migrate
+drizzle-kit push
 ```
 
 ## Development
