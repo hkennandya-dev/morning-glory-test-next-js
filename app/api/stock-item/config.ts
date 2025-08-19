@@ -16,7 +16,9 @@ const select = {
     created_date: item.created_date,
     category_item_id: item.category_item_id,
     unit: item.unit,
-    is_stock: item.is_stock
+    is_stock: item.is_stock,
+    created_at: item.created_at,
+    updated_at: item.updated_at
   },
   category_item_id: item.category_item_id,
   category_item: {

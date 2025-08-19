@@ -32,7 +32,9 @@ export type TableType = {
     created_date?: Date | null
     category_item_id: string,
     unit: string
-    is_stock: boolean
+    is_stock: boolean,
+    created_at: Date
+    updated_at?: Date
   }
   category_item_id: string,
   category_item: {
@@ -43,12 +45,12 @@ export type TableType = {
   }
   stock?: string
 
-  created_at: Date
+  created_at?: Date
   updated_at?: Date
   deleted_at?: Date
 
-  datetime: Date
-  last_action: string
+  datetime?: Date
+  last_action?: string
 }
 
 const formSchema = z.object({
@@ -208,12 +210,12 @@ export const options: OptionType<TableType> = {
     {
       label: "Tanggal",
       tooltip: "Terlama",
-      value: "order_by=coalesce(stock_item.updated_at,stock_item.created_at)&order_type=asc"
+      value: "order_by=coalesce(stock_item.updated_at,stock_item.created_at,item.updated_at,item.created_at)&order_type=asc"
     },
     {
       label: "Tanggal",
       tooltip: "Terbaru",
-      value: "order_by=coalesce(stock_item.updated_at,stock_item.created_at)&order_type=desc",
+      value: "order_by=coalesce(stock_item.updated_at,stock_item.created_at,item.updated_at,item.created_at)&order_type=desc",
       default: true
     }
   ]
@@ -310,23 +312,20 @@ export const columns: ColumnDef<TableType>[] = [
     cell({ row }) {
       const data = row.original as TableType;
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      if (data.datetime) {
-        const rawDate = new Date(data.datetime);
-        const date = toZonedTime(rawDate, timeZone);
-
-        return <div className="flex gap-2">
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger className="text-nowrap">
-                {format(date, "EEEE, dd MMMM yyyy", { locale: id })}
-              </TooltipTrigger>
-              <TooltipContent className="flex gap-1.5">
-                {format(date, "HH:mm:ss", { locale: id })} ({timeZone})
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
-        </div>;
-      }
+      const rawDate = new Date(data.datetime || data.item?.updated_at || data.item.created_at);
+      const date = toZonedTime(rawDate, timeZone);
+      return <div className="flex gap-2">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger className="text-nowrap">
+              {format(date, "EEEE, dd MMMM yyyy", { locale: id })}
+            </TooltipTrigger>
+            <TooltipContent className="flex gap-1.5">
+              {format(date, "HH:mm:ss", { locale: id })} ({timeZone})
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>;
     }
   },
   {
